@@ -1,113 +1,86 @@
 import { motion } from 'framer-motion';
-import { Zap, MessageSquare, Code2, Headphones } from 'lucide-react';
-import { staggerContainer, fadeUp, slideInLeft } from '../../animations/variants';
+import { fadeUp, staggerContainer } from '../../animations/variants';
 
-const points = [
+const steps = [
   {
-    icon: Zap,
-    title: 'Speed Without Compromise',
-    description:
-      'We deliver MVPs in 7 to 14 days. No long waiting periods. You see real progress from day one.',
-    color: '#FF4D2E',
+    num: '1',
+    title: 'Smart Functional Design',
+    desc: 'We focus on creating designs that are not just beautiful, but solve real business problems effectively.',
   },
   {
-    icon: MessageSquare,
-    title: 'Direct Founder Communication',
-    description:
-      'You speak directly with the developer building your product. No account managers, no miscommunication.',
-    color: '#7C5CFF',
+    num: '2',
+    title: 'Business-Driven Development',
+    desc: 'Our code is optimized for scalability and conversion, ensuring your tech stack supports your goals.',
   },
   {
-    icon: Code2,
-    title: 'Clean Scalable Architecture',
-    description:
-      'Every line of code is written with your future in mind. Our systems are built to scale from 10 users to 100,000.',
-    color: '#10B981',
-  },
-  {
-    icon: Headphones,
-    title: 'Post-Launch Support',
-    description:
-      'We do not disappear after delivery. We stay with you for bug fixes, updates, and feature additions.',
-    color: '#F59E0B',
+    num: '3',
+    title: 'High-Converting Websites',
+    desc: 'Every pixel is positioned to guide your users toward taking the actions that matter most to your business.',
   },
 ];
 
 export default function WhyNexora() {
   return (
-    <section id="why-nexora" className="section-padding bg-bg-secondary">
+    <section className="section-padding bg-white">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left — heading */}
-          <motion.div
-            variants={slideInLeft}
-            initial="hidden"
-            whileInView="visible"
+        <div className="flex flex-col lg:flex-row items-center gap-24">
+          {/* Left: Team Image with Floating Pill */}
+          <motion.div 
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 1, ease: "circOut" }}
+            className="flex-1 w-full relative"
           >
-            <span className="inline-block text-xs font-mono font-medium text-brand-secondary uppercase tracking-widest mb-4">
-              Why Choose Us
-            </span>
-            <h2 className="font-display font-bold text-4xl lg:text-5xl text-text-primary leading-tight mb-6">
-              Why Founders
-              <br />
-              Choose{' '}
-              <span className="gradient-text">Nexora</span>
-            </h2>
-            <p className="text-text-secondary font-body text-lg leading-relaxed">
-              We are not an agency that takes your money and disappears. We are a partner who
-              stays invested in your success from the first call to years after launch.
-            </p>
-
-            {/* Decorative element */}
-            <div className="mt-10 flex items-center gap-4">
-              <div className="flex -space-x-3">
-                {['#FF4D2E', '#7C5CFF', '#10B981'].map((c) => (
-                  <div
-                    key={c}
-                    className="w-10 h-10 rounded-full border-2 border-bg-secondary flex items-center justify-center text-xs font-display font-bold text-white"
-                    style={{ backgroundColor: c }}
-                  >
-                    ★
-                  </div>
-                ))}
-              </div>
-              <div>
-                <p className="text-text-primary text-sm font-body font-medium">50+ Happy Founders</p>
-                <p className="text-text-secondary text-xs font-body">across 12 countries</p>
-              </div>
+            <div className="relative aspect-square rounded-[3.5rem] overflow-hidden group">
+              <img 
+                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800" 
+                alt="Nexora Team"
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2s]"
+              />
+              {/* Floating Pill Tag */}
+              <motion.div 
+                initial={{ y: 20, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.5, duration: 0.8 }}
+                className="absolute bottom-10 left-10 px-6 py-3 bg-white shadow-premium rounded-full flex items-center gap-3"
+              >
+                <div className="w-8 h-8 rounded-full bg-brand-primary/10 flex items-center justify-center font-display font-black text-[10px] text-brand-primary">AS</div>
+                <span className="text-xs font-bold text-brand-secondary">Ajinkya Saivar — <span className="text-brand-muted font-medium">Founder</span></span>
+              </motion.div>
             </div>
           </motion.div>
 
-          {/* Right — points grid */}
-          <motion.div
+          {/* Right: Approach */}
+          <motion.div 
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="grid grid-cols-1 sm:grid-cols-2 gap-5"
+            className="flex-1"
           >
-            {points.map(({ icon: Icon, title, description, color }) => (
-              <motion.div
-                key={title}
-                variants={fadeUp}
-                className="p-6 rounded-2xl bg-bg-surface border border-border hover:border-opacity-100 transition-colors duration-300 group"
-                style={{ '--hover-color': color }}
-              >
-                <div
-                  className="w-10 h-10 rounded-lg flex items-center justify-center mb-4"
-                  style={{ backgroundColor: `${color}18` }}
-                >
-                  <Icon size={18} style={{ color }} />
-                </div>
-                <h3 className="font-display font-semibold text-text-primary text-base mb-2">
-                  {title}
-                </h3>
-                <p className="text-text-secondary font-body text-sm leading-relaxed">
-                  {description}
-                </p>
-              </motion.div>
-            ))}
+            <motion.p variants={fadeUp} className="text-brand-primary text-xs font-bold uppercase tracking-[0.3em] mb-6">
+              Our Unique Approach
+            </motion.p>
+            <motion.h2 variants={fadeUp} className="font-display font-extrabold text-5xl lg:text-6xl text-brand-secondary mb-16 leading-tight">
+              We build with purpose<br />and precision.
+            </motion.h2>
+
+            <div className="space-y-12">
+              {steps.map((step) => (
+                <motion.div key={step.num} variants={fadeUp} className="flex gap-8 group">
+                  <div className="flex-shrink-0 w-12 h-12 rounded-full bg-brand-primary text-white flex items-center justify-center font-display font-extrabold text-xl shadow-brand group-hover:scale-110 transition-transform">
+                    {step.num}
+                  </div>
+                  <div>
+                    <h3 className="font-display font-bold text-2xl text-brand-secondary mb-3">{step.title}</h3>
+                    <p className="text-brand-muted text-lg leading-relaxed max-w-md">
+                      {step.desc}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
         </div>
       </div>

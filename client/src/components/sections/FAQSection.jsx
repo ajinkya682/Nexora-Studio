@@ -1,125 +1,91 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
-import { staggerContainer, fadeUp } from '../../animations/variants';
+import { Plus, Minus } from 'lucide-react';
 
 const faqs = [
   {
-    id: 'faq-1',
-    q: 'How long does a typical project take?',
-    a: 'A standard website or landing page takes 5 to 7 days. A full web application or SaaS platform takes 2 to 6 weeks depending on complexity. We give you a precise timeline after the discovery call.',
+    question: 'How long does a typical project take?',
+    answer: 'A standard website takes 2-4 weeks. SaaS platforms and complex web apps usually take 4-8 weeks depending on the scope.',
   },
   {
-    id: 'faq-2',
-    q: 'Do you work with early-stage startups?',
-    a: 'Yes. Most of our clients are founders at the idea or early stage. We help you define scope and build an MVP that you can show to users and investors.',
+    question: 'Do you offer post-launch support?',
+    answer: 'Yes, we provide 30 days of free support after launch to ensure everything runs smoothly and you are comfortable with the system.',
   },
   {
-    id: 'faq-3',
-    q: 'What information do I need to start?',
-    a: 'Just your idea and a rough goal. You can share a brief, a Figma file, a reference site, or even just a voice note. We figure out the rest together.',
+    question: 'Can you help with app design only?',
+    answer: 'Absolutely. We offer standalone UI/UX design services where we deliver high-fidelity Figma prototypes and a design system.',
   },
   {
-    id: 'faq-4',
-    q: 'Do you offer post-launch support?',
-    a: 'Yes. Every project comes with 30 days of free support after delivery. After that, we offer monthly maintenance plans tailored to your needs.',
-  },
-  {
-    id: 'faq-5',
-    q: 'Can I request changes during development?',
-    a: 'Yes. We work in sprints and share previews regularly. Minor changes are included. Large scope changes are discussed and quoted fairly — no surprises.',
+    question: 'How do payments work?',
+    answer: 'We typically work with a 50% upfront deposit and 50% upon project completion. For larger projects, we can split it into milestones.',
   },
 ];
 
-function FAQItem({ item, isOpen, onToggle }) {
-  return (
-    <motion.div
-      variants={fadeUp}
-      className="border border-border rounded-xl overflow-hidden bg-bg-surface"
-    >
-      <button
-        className="w-full flex items-center justify-between px-7 py-5 text-left group"
-        onClick={onToggle}
-        id={item.id}
-        aria-expanded={isOpen}
-      >
-        <span className="font-display font-semibold text-text-primary text-base pr-4 group-hover:text-brand-primary transition-colors duration-200">
-          {item.q}
-        </span>
-        <motion.div
-          animate={{ rotate: isOpen ? 180 : 0 }}
-          transition={{ duration: 0.25, ease: 'easeInOut' }}
-          className="flex-shrink-0 w-8 h-8 rounded-lg bg-bg-secondary flex items-center justify-center"
-        >
-          <ChevronDown size={16} className={`transition-colors duration-200 ${isOpen ? 'text-brand-primary' : 'text-text-secondary'}`} />
-        </motion.div>
-      </button>
-
-      <AnimatePresence initial={false}>
-        {isOpen && (
-          <motion.div
-            key="content"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-            className="overflow-hidden"
-          >
-            <p className="px-7 pb-6 text-text-secondary font-body text-sm leading-relaxed border-t border-border pt-4 mt-0">
-              {item.a}
-            </p>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
-  );
-}
-
 export default function FAQSection() {
-  const [openId, setOpenId] = useState(null);
+  const [openIndex, setOpenIndex] = useState(0);
 
   return (
-    <section id="faq" className="section-padding bg-bg-secondary">
-      <div className="max-w-3xl mx-auto px-6">
-        {/* Heading */}
-        <motion.div
-          className="text-center mb-14"
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          <motion.span
-            variants={fadeUp}
-            className="inline-block text-xs font-mono font-medium text-brand-primary uppercase tracking-widest mb-4"
-          >
-            FAQs
-          </motion.span>
-          <motion.h2
-            variants={fadeUp}
-            className="font-display font-bold text-4xl lg:text-5xl text-text-primary"
-          >
-            Questions We Hear Often
-          </motion.h2>
-        </motion.div>
+    <section className="section-padding bg-bg-primary">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="flex flex-col lg:flex-row gap-20 lg:gap-32">
+          {/* Left side */}
+          <div className="lg:w-2/5">
+            <span className="text-brand-primary text-xs font-bold uppercase tracking-[0.3em] mb-6 block">
+              FAQ
+            </span>
+            <h2 className="font-display font-extrabold text-5xl lg:text-7xl text-brand-secondary leading-tight tracking-tighter">
+              Frequently Asked <span className="text-brand-primary">Questions</span>
+            </h2>
+            <p className="text-brand-muted text-lg mt-10 leading-relaxed max-w-sm">
+              Have a different question? Reach out to us at{' '}
+              <a href="mailto:hello@nexorastudio.com" className="text-brand-primary font-bold hover:underline">
+                hello@nexorastudio.com
+              </a>
+            </p>
+          </div>
 
-        {/* Accordion */}
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="space-y-3"
-        >
-          {faqs.map((item) => (
-            <FAQItem
-              key={item.id}
-              item={item}
-              isOpen={openId === item.id}
-              onToggle={() => setOpenId(openId === item.id ? null : item.id)}
-            />
-          ))}
-        </motion.div>
+          {/* Right side - Accordion */}
+          <div className="flex-1 space-y-2">
+            {faqs.map((faq, idx) => {
+              const isOpen = openIndex === idx;
+              return (
+                <div 
+                  key={idx} 
+                  className="border-b border-border transition-all duration-300 overflow-hidden"
+                >
+                  <button
+                    onClick={() => setOpenIndex(isOpen ? -1 : idx)}
+                    className="w-full py-8 flex items-center justify-between text-left group"
+                  >
+                    <span className={`font-display font-bold text-xl lg:text-2xl transition-colors ${isOpen ? 'text-brand-primary' : 'text-brand-secondary group-hover:text-brand-primary'}`}>
+                      {faq.question}
+                    </span>
+                    <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${
+                      isOpen ? 'bg-brand-primary text-white rotate-180' : 'bg-transparent text-brand-primary border border-brand-primary/20 group-hover:bg-brand-primary group-hover:text-white'
+                    }`}>
+                      {isOpen ? <Minus size={20} /> : <Plus size={20} />}
+                    </div>
+                  </button>
+                  
+                  <AnimatePresence>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.4, ease: "circOut" }}
+                      >
+                        <div className="pb-10 text-brand-muted text-lg leading-relaxed pr-10">
+                          {faq.answer}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </section>
   );

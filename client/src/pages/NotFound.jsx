@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { scaleIn, fadeUp } from '../../animations/variants';
+import { scaleIn, fadeUp } from '../animations/variants';
 import { Home } from 'lucide-react';
 
 export default function NotFound() {

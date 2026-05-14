@@ -6,6 +6,8 @@ import ServicesSection from '../../components/sections/ServicesSection';
 import WhyNexora from '../../components/sections/WhyNexora';
 import ProjectsSection from '../../components/sections/ProjectsSection';
 import ProcessSection from '../../components/sections/ProcessSection';
+import TeamSection from '../../components/sections/TeamSection';
+import ClientsSection from '../../components/sections/ClientsSection';
 import CTASection from '../../components/sections/CTASection';
 import FAQSection from '../../components/sections/FAQSection';
 
@@ -23,6 +25,8 @@ export default function Home() {
       <WhyNexora />
       <ProjectsSection />
       <ProcessSection />
+      <TeamSection />
+      <ClientsSection />
       <CTASection />
       <FAQSection />
     </motion.div>

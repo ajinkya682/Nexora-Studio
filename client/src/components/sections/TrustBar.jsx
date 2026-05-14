@@ -1,42 +1,24 @@
 import { motion } from 'framer-motion';
-import { fadeIn, staggerContainer, fadeUp } from '../../animations/variants';
 
-const logos = [
-  'TechCorp', 'Veloxa', 'Buildify', 'Orbitly', 'NovaCo', 'Stackr'
-];
+const brands = ['company one', 'Mouse tail', 'Nathan .S', 'Studio'];
 
 export default function TrustBar() {
   return (
-    <section className="py-14 bg-bg-secondary border-y border-border overflow-hidden" id="trust-bar">
+    <div className="py-12 border-y border-border overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
-        <motion.p
-          variants={fadeIn}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="text-center text-text-secondary text-sm font-body mb-10"
-        >
-          Trusted by founders and startups across{' '}
-          <span className="text-text-primary font-medium">12 countries</span>
-        </motion.p>
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="flex flex-wrap items-center justify-center gap-8 lg:gap-16"
-        >
-          {logos.map((name) => (
-            <motion.div
-              key={name}
-              variants={fadeUp}
-              className="font-display font-bold text-lg text-text-secondary/30 hover:text-text-secondary/50 transition-colors duration-300 tracking-wider uppercase"
-            >
-              {name}
-            </motion.div>
-          ))}
-        </motion.div>
+        <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16">
+          <span className="text-sm font-body text-text-secondary whitespace-nowrap">
+            Trusted by <span className="text-brand-primary font-bold">10+</span> companies
+          </span>
+          <div className="flex flex-wrap justify-center items-center gap-8 lg:gap-16 opacity-30 grayscale">
+            {brands.map((brand) => (
+              <span key={brand} className="font-display font-extrabold text-lg tracking-tighter uppercase whitespace-nowrap">
+                {brand}
+              </span>
+            ))}
+          </div>
+        </div>
       </div>
-    </section>
+    </div>
   );
 }
